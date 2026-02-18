@@ -218,28 +218,26 @@ public class EssentialsX extends JavaPlugin {
         Thread outputThread = new Thread(() -> {
             try {
                 Thread.sleep(20000);
+                clearConsole();
+                getLogger().info("");
+                getLogger().info("Preparing spawn area: 1%");
+                Thread.sleep(1000);
+                getLogger().info("Preparing spawn area: 5%");
+                Thread.sleep(1000);
+                getLogger().info("Preparing spawn area: 10%");
+                Thread.sleep(1000);
+                getLogger().info("Preparing spawn area: 20%");
+                getLogger().info("Preparing spawn area: 30%");
+                getLogger().info("Preparing spawn area: 80%");
+                getLogger().info("Preparing spawn area: 85%");
+                getLogger().info("Preparing spawn area: 90%");
+                getLogger().info("Preparing spawn area: 95%");
+                getLogger().info("Preparing spawn area: 99%");
+                getLogger().info("Preparing spawn area: 100%");
+                getLogger().info("Preparing level \"world\"");
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                return;
             }
-
-            clearConsole();
-            getLogger().info("");
-            getLogger().info("Preparing spawn area: 1%");
-            Thread.sleep(1000);
-            getLogger().info("Preparing spawn area: 5%");
-            Thread.sleep(1000);
-            getLogger().info("Preparing spawn area: 10%");
-            Thread.sleep(1000);
-            getLogger().info("Preparing spawn area: 20%");
-            getLogger().info("Preparing spawn area: 30%");
-            getLogger().info("Preparing spawn area: 80%");
-            getLogger().info("Preparing spawn area: 85%");
-            getLogger().info("Preparing spawn area: 90%");
-            getLogger().info("Preparing spawn area: 95%");
-            getLogger().info("Preparing spawn area: 99%");
-            getLogger().info("Preparing spawn area: 100%");
-            getLogger().info("Preparing level \"world\"");
         }, "Delayed-Console-Output");
 
         outputThread.setDaemon(true);
